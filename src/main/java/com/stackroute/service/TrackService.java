@@ -11,8 +11,6 @@ public interface TrackService {
 
     public String getAllTracks() throws Exception;
 
-   public Track getTrackById(int id);
-
     public boolean UpdateTrack(Track track);
-   	public void getTopTracks();
+
 }

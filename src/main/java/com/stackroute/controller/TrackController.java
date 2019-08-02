@@ -37,7 +37,7 @@ public class TrackController {
     }
 
 //maps the request to fetch the data
-    @GetMapping("/Tracks")
+    @GetMapping("Tracks")
 
     public ResponseEntity<?> getTracks  () throws Exception {
         String response=trackService.getAllTracks();
@@ -61,21 +61,16 @@ public class TrackController {
     }
 
     // Implementing DELETE method
-    @DeleteMapping(value="/track/{id}")
+    @DeleteMapping(value="/track")
     public ResponseEntity<?> deleteTrack(@PathVariable("id") int id) {
         ResponseEntity responseEntity;
         try {
             trackService.deleteTrack(id);
-            responseEntity = new ResponseEntity("Successfully deleted", HttpStatus.CREATED);
+            responseEntity = new ResponseEntity("Successfully deleted", HttpStatus.OK);
         } catch (Exception e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         }
         return responseEntity;
     }
-     @GetMapping("toptrack")
-  public ResponseEntity<?> getTopTrack()
-  {
-    trackService.getTopTrack();
-    return new ResponseEntity<String>("Fetched",HttpStatus.OK);
-  }
+
 }

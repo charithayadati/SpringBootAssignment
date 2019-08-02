@@ -24,6 +24,7 @@ import static org.springframework.http.HttpHeaders.USER_AGENT;
 public class TrackServiceImpl implements TrackService{
     @Autowired
     TrackRepository trackRepository;
+    Track track;
     @Autowired
     public  String GET_URL= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=Cher&api_key=7d6f2b9fc930e3787b10435ea7b7de4a&format=json";
 
@@ -37,16 +38,17 @@ public class TrackServiceImpl implements TrackService{
 //saves the new track
     @Override
     public boolean saveTrack(Track track) {
-        Track saveduser=trackRepository.save(track);
+        Track savedtrack=trackRepository.save(track);
         return  true;
 
     }
+
 //deletes the track
     @Override
     public boolean deleteTrack(int id) {
         if(trackRepository.existsById(id))
         {
-            Track track=getTrackById(id);
+
             trackRepository.delete(track);
             return true;
         }
@@ -58,7 +60,7 @@ public class TrackServiceImpl implements TrackService{
     //returns track by id
     @Override
     public Track getTrackById(int id) {
-        return getTrackById(id);
+        return track;
     }
 //updates the track
     @Override
@@ -115,17 +117,6 @@ public class TrackServiceImpl implements TrackService{
 			e.printStackTrace();
 		}
 	}
-
-  @Override
-  public Optional<Track> getTrackById(int id) {
-    Optional<Track> track = null;
-	  if(trackRepository.existsById(id))
-    {
-     track=trackRepository.findById(id);
-    }
-    return track;
-  }
-}
 
 
 
